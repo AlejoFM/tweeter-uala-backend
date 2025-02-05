@@ -1,0 +1,59 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: uala-twitter-clone-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - twitter-clone
+
+  nginx:
+    image: nginx:alpine
+    container_name: uala-twitter-clone-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - twitter-clone
+
+  mysql:
+    image: mysql:8.0
+    container_name: uala-twitter-clone-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: twitter_clone
+
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: twitter
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - twitter-clone
+
+  redis:
+    image: redis:alpine
+    container_name: uala-twitter-clone-redis
+    restart: unless-stopped
+    networks:
+
+      - twitter-clone
+
+networks:
+  twitter-clone:
+    driver: bridge
+
+volumes:
+  dbdata: 
