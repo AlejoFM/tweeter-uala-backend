@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
     netcat-openbsd
 
 # Instalar extensiones PHP
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pc# Instalar Comp# Instalar Redis
+RUN pecl install redis && docker-php-ext-enable redis
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -21,14 +22,15 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Configurar directorio de trabajo
 WORKDIR /var/www
 
-# Copiar composer.json primero
-COPY composer.json composer.lock ./
-
-# Instalar dependencias
-RUN composer install --no-scripts --no-autoloader
-
-# Copiar el resto de los archivos
+# Copiar archivos del proyecto
 COPY . .
+
+# Permisos para Laravel
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 775 /var/www/storage \
+    && chmod -R 775 /var/www/bootstrap/cache
+ootstrap/cache
+/bootstrap/cache
 
 COPY .env.example /var/www/.env 
 

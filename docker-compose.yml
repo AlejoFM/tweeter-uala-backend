@@ -6,14 +6,24 @@ services:
       dockerfile: Dockerfile
     container_name: uala-twitter-clone-app
     restart: unless-stopped
-    working_dir: /var/www
+    working_dir: /    volu    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=twitter_clone
+      - DB_USERNAME=twitter
+      - DB_PASSWORD=secret
     volumes:
       - ./:/var/www
-    depends_on:
-      - mysql
-      - redis
     networks:
       - twitter-clone
+    healthcheck:
+      test: ["CMD", "php-fpm", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   nginx:
     image: nginx:alpine
@@ -21,10 +31,12 @@ services:
     restart: unless-stopped
     ports:
       - "8000:80"
-
     volumes:
       - ./:/var/www
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      app:
+        condition: service_healthy
     networks:
       - twitter-clone
 
@@ -34,10 +46,14 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: twitter_clone
-
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: secret
       MYSQL_USER: twitter
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     volumes:
       - dbdata:/var/lib/mysql
     networks:
@@ -48,7 +64,18 @@ services:
     container_name: uala-twitter-clone-redis
     restart: unless-stopped
     networks:
-
+-clone-redis
+    restart: unless-stopped
+    networks:
+-clone-redis
+    restart: unless-stopped
+    networks:
+-clone-redis
+    restart: unless-stopped
+    networks:
+r-clone-redis
+    restart: unless-stopped
+    networks:
       - twitter-clone
 
 networks:
