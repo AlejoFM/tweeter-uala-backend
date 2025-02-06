@@ -194,9 +194,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\User\Providers\UserServiceProvider::class,
-        App\Tweet\Providers\TweetServiceProvider::class,
-        App\Timeline\Providers\TimelineServiceProvider::class,
+        src\User\Providers\UserServiceProvider::class,
+        src\Tweet\Providers\TweetServiceProvider::class,
+        src\Timeline\Providers\TimelineServiceProvider::class,
 
     ],
 
