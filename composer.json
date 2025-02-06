@@ -26,9 +26,9 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "App\\User\\": "src/User/",
-            "App\\Tweet\\": "src/Tweet/",
-            "App\\Timeline\\": "src/Timeline/"
+            "src\\User\\": "src/User/",
+            "src\\Tweet\\": "src/Tweet/",
+            "src\\Timeline\\": "src/Timeline/"
         }
     },
     "autoload-dev": {
