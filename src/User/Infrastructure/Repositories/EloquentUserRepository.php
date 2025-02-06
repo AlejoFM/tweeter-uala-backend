@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Repositories;
+namespace src\User\Infrastructure\Repositories;
 
-use App\User\Domain\Models\Entities\User;
+use src\User\Domain\Models\Entities\User;
 
-use App\User\Domain\Repositories\UserRepositoryInterface;
+use src\User\Domain\Repositories\UserRepositoryInterface;
 
 class EloquentUserRepository implements UserRepositoryInterface
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\User\Providers;
+namespace src\User\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\User\Domain\Repositories\UserRepositoryInterface;
-use App\User\Infrastructure\Repositories\EloquentUserRepository;
+use src\User\Domain\Repositories\UserRepositoryInterface;
+use src\User\Infrastructure\Repositories\EloquentUserRepository;
 
 class UserServiceProvider extends ServiceProvider
 {

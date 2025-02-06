@@ -1,10 +1,10 @@
 <?php 
 declare(strict_types=1);
 
-namespace App\Timeline\Presentation\HTTP;
+namespace src\Timeline\Presentation\HTTP;
 
 use App\Http\Controllers\Controller;
-use App\Timeline\Domain\Repositories\TimelineRepositoryInterface;
+use src\Timeline\Domain\Repositories\TimelineRepositoryInterface;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

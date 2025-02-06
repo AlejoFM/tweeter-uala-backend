@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\User\Domain\Repositories;
+namespace src\User\Domain\Repositories;
 
-use App\User\Domain\Models\Entities\User;
+use src\User\Domain\Models\Entities\User;
 
 interface UserRepositoryInterface
 {

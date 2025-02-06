@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Timeline\Providers;
+namespace src\Timeline\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Timeline\Domain\Repositories\TimelineRepositoryInterface;
-use App\Timeline\Infrastructure\Repositories\EloquentTimelineRepository;
+use src\Timeline\Domain\Repositories\TimelineRepositoryInterface;
+use src\Timeline\Infrastructure\Repositories\EloquentTimelineRepository;
 
 class TimelineServiceProvider extends ServiceProvider
 {

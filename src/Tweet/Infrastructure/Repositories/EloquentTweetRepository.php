@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Tweet\Infrastructure\Repositories;
+namespace src\Tweet\Infrastructure\Repositories;
 
-use App\Tweet\Domain\Models\Tweet;
-use App\Tweet\Domain\Repositories\TweetRepositoryInterface;
+use src\Tweet\Domain\Models\Tweet;
+use src\Tweet\Domain\Repositories\TweetRepositoryInterface;
 
 class EloquentTweetRepository implements TweetRepositoryInterface
 {

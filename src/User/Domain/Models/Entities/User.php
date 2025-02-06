@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\User\Domain\Models\Entities;
+namespace src\User\Domain\Models\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 

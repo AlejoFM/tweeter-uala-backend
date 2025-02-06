@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Timeline\Domain\Repositories;
+namespace src\Timeline\Domain\Repositories;
 
 interface TimelineRepositoryInterface
 

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tweet\Providers;
+namespace src\Tweet\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Tweet\Domain\Repositories\TweetRepositoryInterface;
-use App\Tweet\Infrastructure\Repositories\EloquentTweetRepository;
+use src\Tweet\Domain\Repositories\TweetRepositoryInterface;
+use src\Tweet\Infrastructure\Repositories\EloquentTweetRepository;
 
 class TweetServiceProvider extends ServiceProvider
 {

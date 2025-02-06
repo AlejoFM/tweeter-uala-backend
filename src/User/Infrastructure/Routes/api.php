@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\User\Presentation\HTTP\UserController;
+use src\User\Presentation\HTTP\UserController;
 
 Route::prefix('users')->group(function () {
 

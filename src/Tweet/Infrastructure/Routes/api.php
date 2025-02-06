@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Tweet\Presentation\HTTP\TweetController;
+use src\Tweet\Presentation\HTTP\TweetController;
 
 
 Route::middleware('identify.user')->group(function () {

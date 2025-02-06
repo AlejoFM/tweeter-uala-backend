@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Tweet\Presentation\HTTP;
+namespace src\Tweet\Presentation\HTTP;
 
 use App\Http\Controllers\Controller;
-use App\Tweet\Domain\Repositories\TweetRepositoryInterface;
+use src\Tweet\Domain\Repositories\TweetRepositoryInterface;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

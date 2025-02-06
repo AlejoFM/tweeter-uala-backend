@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tweet\Domain\Repositories;
+namespace src\Tweet\Domain\Repositories;
 
-use App\Tweet\Domain\Models\Tweet;
+use src\Tweet\Domain\Models\Tweet;
 
 
 interface TweetRepositoryInterface

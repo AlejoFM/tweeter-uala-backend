@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tweet\Domain\Models;
+namespace src\Tweet\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
