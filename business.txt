@@ -1,0 +1,95 @@
+# UALA
+
+# Twitter Clone
+
+
+
+# Escalabilidad :
+- Problematica : Hacer un sistema escalable que pueda soportar un gran numero de usuarios.
+- Solucion : Usar Kubernetes para poder escalar de forma horizontal el numero de pods en función de la carga de la CPU o memoria.
+permitiendo de esta manera que se puedan soportar un gran numero de usuarios, dando lugar a un sistema mas robusto.
+
+- Otras alternativas : Usar servicios de terceros como AWS, Azure, etc.
+Ya que estamos en el contexto de contenedores, se podría usar AWS ECS que es un servicio de contenedor de AWS.
+Pero en el caso de que no quisieramos usar contenedores, se podría utilizar una instancia de EC2 el cual posee una arquitectura mas sencilla y nos permitiría 
+escalar de manera horizontal automaticamente, en base a la demanda que tengamos en ciertos momentos.
+Además, si quisieramos controlar el trafico de nuestra aplicación, podríamos utilizar AWS ELB que es un servicio de balanceo de carga de AWS.
+El uso de servicios en la nube es una alternativa más sencilla y barata, que si se combina con los diferentes servicios que ofrece AWS, podría llegar a ser
+una solución más robusta, escalable y de alta disponibilidad.
+
+# Optimización para lecturas :
+- Problematica : Hacer un sistema optimizado para lecturas, es decir, que pueda soportar un gran numero de usuarios concurrentes.
+- Solucion : Usar Redis para cachear las consultas a la base de datos, de esta manera se reducirá la carga de la base de datos y se mejorará el rendimiento de la aplicación.
+- Otras alternativas : Se podría implementar una arquitectura CQRS (Command Query Responsibility Segregation) para poder separar las responsabilidades de la aplicación.
+Por ejemplo, se podría usar una base de datos no relacional como MongoDB, que es una base de datos NoSQL que es más eficiente para el caso de lectura de datos, teniendo
+también disponible para escrituras, una base de datos relacional como MySQL.
+de esta manera se podría tener una base de datos optimizada para lecturas y otra para escrituras, aprovechando las ventajas de cada una de ellas.
+pero considero que para una primera instancia, no es necesario ensuciarse las manos sumando capas de abstración, 
+resultando en un sistema medianamente complejo, ya que Redis nos da una solución más sencilla, permitiendo llegar a un MVP (Minimum Viable Product) más rápido.
+
+# Definición de la arquitectura interna : 
+- Problematica : Definir la arquitectura interna de la aplicación, es decir, como se va a organizar el código de la aplicación.
+- Solucion : Se utilizó una combinación de arquitectura DDD ( Domain Driven Design ) y modular monolith. Esto con la intención de poder tener un flujo de trabajo más organizado y 
+mantenible, con DDD podemos abstraer el dominio de la aplicación, permitiendo de esta manera que se pueda ir escalando
+de manera progresiva, sin tener que hacer grandes cambios en la arquitectura de la aplicación y con el modular monolith podemos trabajar por modulos aprovechando los
+services providers que nos da Laravel, dando lugar a que si el dia de mañana se quisiera mudar el sistema a microservicios, se podría hacer de manera más sencilla.
+
+- Otros comentarios : Por qué no optar por microservicios como primer opción?
+    - Entiendo que los microservicios son una arquitectura más moderna y que se puede llegar a adaptar mejor a las necesidades de la aplicación, pero pienso que para una primera instancia,
+    puede llegar a ser una experiencía de desarrollo más complicada e ineficiente, ya que Laravel es un framework que nos da una arquitectura modular por defecto, si se quisiera
+    armar un proyecto si o si con microservicios, tenemos herramientas más adaptadas para ello, como lo es Spring Cloud con la suite de herramientas que nos da Spring Boot.
+
+# Resistencia al fallo :
+- Problematica : Hacer un sistema resistente al fallo, es decir, que pueda soportar un gran numero de usuarios concurrentes y que no se caiga.
+- Solucion : Con kubernetes tendríamos un sistema el cual automaticamente se encarga de reiniciar los pods que fallen, permitiendo de esta manera que el sistema siga funcionando con un
+minimo de instancias. De igual manera, ya que no veo tan necesario usar un sistema de mensajería asíncrona como lo es RabbitMQ o Kafka 
+para un monolito ( aun que si se planeara un futuro para microservicios o CQRS, podriamos utilizar alguno de ellos ), se podría implementar un Circuit Breaker
+en los modulos más importantes, dando lugar a que si en algun momento por algún motivo, falla algún modulo, el sistema no se caiga, sino que siga funcionando con lo último que se tenia
+en cache ( Redis ), hasta que el sistema se recupere. 
+Otro detalle a tener en cuenta o que por lo menos me parece importante, es implementar un rate limiter, justamente para prevenir que saturen al sistema intencionalmente (DDOS).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
