@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\User\Presentation\HTTP;
+namespace src\User\Presentation\HTTP;
 
 use App\Http\Controllers\Controller;
-use App\User\Domain\Repositories\UserRepositoryInterface;
+use src\User\Domain\Repositories\UserRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller

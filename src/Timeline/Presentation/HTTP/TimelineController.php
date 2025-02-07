@@ -18,9 +18,9 @@ class TimelineController extends Controller
     public function forYou(Request $request): JsonResponse
     {
         $timeline = $this->timelineRepository->getForYou(
-            userId: $request->attributes->get('userId'),
-            cursor: $request->input('cursor'),
-            limit: $request->input('limit', 20)
+            userId: intval($request->get('userId')),
+            cursor: $request->get('cursor'),
+            limit: intval($request->get('limit', 20))
         );
 
         return response()->json(['data' => $timeline]);
@@ -29,9 +29,9 @@ class TimelineController extends Controller
     public function following(Request $request): JsonResponse
     {
         $timeline = $this->timelineRepository->getFollowing(
-            userId: $request->attributes->get('userId'),
-            cursor: $request->input('cursor'),
-            limit: $request->input('limit', 20)
+            userId: intval($request->get('userId')),
+            cursor: $request->get('cursor'),
+            limit: intval($request->get('limit', 20))
         );
 
         return response()->json(['data' => $timeline]);
