@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: laravel-config
+  namespace: twitter-app
+data:
+  APP_NAME: "Twitter Clone"
+  APP_ENV: "production"
+  APP_DEBUG: "false"
+  CACHE_DRIVER: "redis"
+  QUEUE_CONNECTION: "redis"
+  SESSION_DRIVER: "redis"

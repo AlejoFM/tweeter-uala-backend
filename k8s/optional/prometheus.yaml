@@ -1,0 +1,12 @@
+# kubernetes/prometheus.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: laravel-monitor
+  namespace: twitter-app
+spec:
+  selector:
+    matchLabels:
+      app: laravel
+  endpoints:
+  - port: metrics

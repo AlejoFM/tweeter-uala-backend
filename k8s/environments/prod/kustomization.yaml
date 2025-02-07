@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: twitter-app-prod
+
+resources:
+  - ../../base/namespace.yaml
+  - ../../base/deployment.yaml
+  - ../../base/service.yaml
+  - ../../base/secret.yaml
+  - ../../optional/ingress.yaml
+  - ../../optional/hpa.yaml
+
+patches:
+  - target:
+      kind: Deployment
+      name: twitter-clone-app
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/limits/memory
+        value: 1Gi
+
+configMapGenerator:
+  - name: app-config
+    literals:
+      - APP_ENV=production
+      - APP_DEBUG=false

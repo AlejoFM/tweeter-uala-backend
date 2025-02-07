@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: twitter-clone-app
+  namespace: twitter-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: twitter-clone-app
+  template:
+    metadata:
+      labels:
+        app: twitter-clone-app
+    spec:
+      containers:
+      - name: app
+        image: twitter-clone-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
