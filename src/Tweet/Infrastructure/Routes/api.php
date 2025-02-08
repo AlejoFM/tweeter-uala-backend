@@ -1,13 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use src\Tweet\Presentation\HTTP\TweetController;
+use src\Tweet\Presentation\HTTP\CreateTweetController;
+use src\Tweet\Presentation\HTTP\FindByIdTweetController;
 
 
-Route::middleware('identify.user')->group(function () {
-    Route::prefix('tweets')->group(function () {
-        Route::post('/', [TweetController::class, 'store']);
-        Route::get('/{id}', [TweetController::class, 'show']);
-        Route::get('/timeline', [TweetController::class, 'timeline']);
-    });
-}); 
+Route::prefix('tweets')->group(function () {
+    Route::post('/', [CreateTweetController::class, '__invoke']);
+    Route::get('/{id}', [FindByIdTweetController::class, '__invoke']);
+});
