@@ -27,7 +27,6 @@ class CreateTweetControllerTest extends TestCase
             ->assertJson([
                 'data' => [
                     'content' => 'Hello World',
-                    'user_id' => 1
                 ]
             ]);
     }

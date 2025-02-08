@@ -15,9 +15,8 @@ class TweetServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(TweetRepositoryInterface::class, EloquentTweetRepository::class);
         $this->app->bind(CreateTweetRepositoryInterface::class, EloquentCreateTweetRepository::class);
-        $this->app->bind(EloquentFindByIdTweetRepository::class, EloquentFindByIdTweetRepository::class);
+        $this->app->bind(EloquentFindByIdTweetRepositoryInterface::class, EloquentFindByIdTweetRepository::class);
     }
 
     public function boot(): void
