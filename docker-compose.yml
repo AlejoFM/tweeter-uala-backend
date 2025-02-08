@@ -45,6 +45,8 @@ services:
     image: redis:alpine
     container_name: twitter-clone-redis
     restart: unless-stopped
+    ports:
+      - "6379:6379"
     networks:
       - twitter-clone
 
