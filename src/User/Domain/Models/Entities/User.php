@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace src\User\Domain\Models\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class User
 {
     public function __construct(
         private readonly int $id,
@@ -20,5 +19,10 @@ class User extends Model
     public function getUsername(): string
     {
         return $this->username;
+    }
+
+    public static function fromPrimitives(int $id, string $username): self
+    {
+        return new self($id, $username);
     }
 }
