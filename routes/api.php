@@ -14,6 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * @OA\Get(
+ *     path="/api/health",
+ *     summary="Health check endpoint",
+ *     tags={"System"},
+ *     @OA\Response(
+ *         response=200,
+ *         description="System health status",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="string", example="healthy"),
+ *             @OA\Property(property="timestamp", type="string", format="date-time"),
+ *             @OA\Property(property="memory_usage", type="integer"),
+ *             @OA\Property(property="cpu_usage", type="number", format="float")
+ *         )
+ *     )
+ * )
+ */
 Route::get('/health', function () {
     return response()->json([
         'status' => 'healthy',
@@ -22,3 +39,5 @@ Route::get('/health', function () {
         'cpu_usage' => sys_getloadavg()[0]
     ]);
 });
+
+
