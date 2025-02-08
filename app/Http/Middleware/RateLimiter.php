@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use src\Shared\Domain\Exceptions\RateLimitExceededException;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use src\Shared\Exceptions\RateLimitExceededException;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -21,7 +21,11 @@ class RateLimiter
         $path = explode('/', trim($request->path(), '/'));
         $config = config('rate-limits');
 
-        return $config[$path[0]][$path[1]] ?? [
+        if (isset($path[0]) && isset($path[1]) && isset($config[$path[0]][$path[1]])) {
+            return $config[$path[0]][$path[1]];
+        }
+
+        return [
             'limit' => self::RATE_LIMIT,
             'window' => self::TIME_WINDOW
         ];
@@ -57,4 +61,4 @@ class RateLimiter
     {
         return md5($request->method() . ':' . $request->path());
     }
-} 
+}

@@ -3,7 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use src\Shared\Domain\Exceptions\RateLimitExceededException;
+use src\Shared\Exceptions\RateLimitExceededException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -49,13 +49,14 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        if ($e instanceof RateLimitExceededException) {
-            return response()->json([
-                'error' => $e->getMessage(),
-                'retry_after' => $e->getRetryAfter()
-            ], $e->getStatusCode());
+        switch ($e) {
+            case $e instanceof RateLimitExceededException:
+                return response()->json([
+                    'error' => $e->getMessage(),
+                    'retry_after' => $e->retryAfter
+                ], $e->getCode());
+            default:
+                return parent::render($request, $e);
         }
-
-        return parent::render($request, $e);
     }
 }
