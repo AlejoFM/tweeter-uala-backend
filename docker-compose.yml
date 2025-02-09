@@ -31,9 +31,12 @@ services:
     image: mysql:8.0
     container_name: twitter-clone-mysql
     restart: unless-stopped
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: twitter_clone
       MYSQL_ROOT_PASSWORD: root
+
       MYSQL_PASSWORD: secret
       MYSQL_USER: twitter
     volumes:
