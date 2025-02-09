@@ -58,9 +58,11 @@ class Handler extends ExceptionHandler
             default:
                 if (env('APP_ENV') === 'dev') {
                     return response()->json([
-                        'error' => $e->getMessage(),
+                        'message' => $e->getMessage(),
+                        'status' => $e->getCode(),
+                        'line' => $e->getLine(),
+                        'file' => $e->getFile(),
                         'trace' => $e->getTrace(),
-                        'status' => $e->getCode()
                     ], $e->getCode());
                 }
                 
