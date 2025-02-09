@@ -9,9 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use src\User\Domain\Models\Entities\User;
 use src\User\Infrastructure\Persistence\UserEloquentModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use src\Tweet\Infrastructure\Persistence\Factories\TweetEloquentModelFactory;
 
 class TweetEloquentModel extends Model
 {
+    use HasFactory;
+
     protected $table = 'tweets';
     
     protected $fillable = [
@@ -22,7 +26,17 @@ class TweetEloquentModel extends Model
 
     protected $with = ['user'];
 
+    protected static function newFactory(): TweetEloquentModelFactory
+    {
+        return TweetEloquentModelFactory::new();
+    }
+
     public function user(): BelongsTo
+    {
+        return $this->belongsTo(UserEloquentModel::class, 'user_id');
+    }
+
+    public function userEloquentModel(): BelongsTo
     {
         return $this->belongsTo(UserEloquentModel::class, 'user_id');
     }
@@ -57,7 +71,9 @@ class TweetEloquentModel extends Model
         );
     }
 
-
-
+    public static function factory(): TweetEloquentModelFactory
+    {
+        return TweetEloquentModelFactory::new();
+    }
 }
 
