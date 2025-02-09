@@ -56,7 +56,18 @@ class Handler extends ExceptionHandler
                     'retry_after' => $e->retryAfter
                 ], $e->getCode());
             default:
-                return parent::render($request, $e);
+                if (env('APP_ENV') === 'dev') {
+                    return response()->json([
+                        'error' => $e->getMessage(),
+                        'trace' => $e->getTrace(),
+                        'status' => $e->getCode()
+                    ], $e->getCode());
+                }
+                
+                return response()->json([
+                    'message' => $e->getMessage(),
+                    'status' => $e->getCode()
+                ], $e->getCode());
         }
     }
 }
