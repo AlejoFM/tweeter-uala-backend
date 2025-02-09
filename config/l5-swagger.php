@@ -45,10 +45,12 @@ return [
                  */
                 'annotations' => [
                     base_path('app'),
-                    base_path('src/User/Presentation/HTTP/UserController.php'),
+                    base_path('src/User/Presentation/HTTP/UserFollowByIdController.php'),
+                    base_path('src/User/Presentation/HTTP/UserFindByIdController.php'),
                     base_path('src/Tweet/Presentation/HTTP/CreateTweetController.php'),
                     base_path('src/Tweet/Presentation/HTTP/FindByIdTweetController.php'),
-                    base_path('src/Timeline/Presentation/HTTP/TimelineController.php'),
+                    base_path('src/Timeline/Presentation/HTTP/TimelineForYouController.php'),
+                    base_path('src/Timeline/Presentation/HTTP/TimelineFollowingController.php'),
                 ],
             ],
         ],
