@@ -1,12 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace src\User\Domain\Repositories;
 
 use src\User\Domain\Models\Entities\User;
 
-interface UserRepositoryInterface
+interface UserFindByIdRepositoryInterface
+
 {
     public function findById(int $id): ?User;
-} 
+}

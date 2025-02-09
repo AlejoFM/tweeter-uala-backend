@@ -37,5 +37,16 @@ class UserEloquentModel extends Model
         return $this->hasMany(TweetEloquentModel::class, 'user_id');
     }
 
+    public function following()
+    {
+        return $this->belongsToMany(UserEloquentModel::class, 'follows', 'follower_id', 'following_id');
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(UserEloquentModel::class, 'follows', 'following_id', 'follower_id');
+    }
+    
+
 }
 
