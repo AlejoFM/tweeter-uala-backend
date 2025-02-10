@@ -16,7 +16,7 @@ class TimelineForYouController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/timeline/for-you",
+     *     path="/api/timeline/for-you",
      *     summary="Get the timeline for the authenticated user",
      *     tags={"Timeline"},
      *     security={{"userIdHeader":{}}},

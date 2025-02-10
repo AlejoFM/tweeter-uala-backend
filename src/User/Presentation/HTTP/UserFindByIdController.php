@@ -15,7 +15,7 @@ class UserFindByIdController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/users/{id}",
+     *     path="/api/users/{id}",
      *     summary="Get a user by their ID",
      *     tags={"Users"},
      *     @OA\Parameter(name="id", in="path", required=true, description="ID of the user to retrieve"),

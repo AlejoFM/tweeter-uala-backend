@@ -17,7 +17,7 @@ class TimelineFollowingController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/timeline/following/{userId}",
+     *     path="/api/timeline/following/{userId}",
      *     summary="Get the timeline for a specific user",
      *     tags={"Timeline"},
      *     security={{"userIdHeader":{}}},

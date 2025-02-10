@@ -65,7 +65,8 @@ class CreateTweetController extends Controller
 
     public function __invoke(CreateTweetFormRequest $request): JsonResponse
     {
-        $tweet = $this->repository->create(
+            $tweet = $this->repository->create(
+
 
             userId: UserId::fromInt($request->userId()),
             content: TweetContent::fromString($request->content())
@@ -75,5 +76,6 @@ class CreateTweetController extends Controller
         return TweetResource::make($tweet)
             ->response()
             ->setStatusCode(201);
+
     }
 }

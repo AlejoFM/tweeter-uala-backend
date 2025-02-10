@@ -19,7 +19,7 @@ class FindByIdTweetController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/tweets/{id}",
+     *     path="/api/tweets/{id}",
      *     summary="Obtener un tweet por su ID",
      *     tags={"Tweets"},
      *     @OA\Parameter(name="id", in="path", required=true, description="ID del tweet"),
