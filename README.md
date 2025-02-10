@@ -201,6 +201,7 @@ docker ps
 - Credenciales: `admin / admin`
 
 ## Prometheus
+- Prometheus está disponible en "http://localhost:9090"
 
 ## 📝 Comentarios y justificaciones
 
