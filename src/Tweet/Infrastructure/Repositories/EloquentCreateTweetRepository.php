@@ -28,8 +28,6 @@ class EloquentCreateTweetRepository implements CreateTweetRepositoryInterface
             id: $userModel->id,
             username: $userModel->username,
         );
-
-        Log::info('Tweet created from repository: ' . json_encode($model));
         return Tweet::create(
             id: $model->id,
             userId: UserId::fromInt($model->user_id),
