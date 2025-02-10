@@ -1,26 +1,35 @@
 #!/bin/bash
 
-# Esperar a que MySQL esté listo
-echo "Waiting for MySQL to be ready..."
-while ! nc -z mysql 3306; do
+# Esperar a que MySQL esté disponible
+while ! nc -z db 3306; do
+    echo "🚀 Esperando a que MySQL esté disponible..."
     sleep 1
 done
 
-cd /var/www
+# Esperar a que Redis esté disponible
+while ! nc -z redis 6379; do
+    echo "🚀 Esperando a que Redis esté disponible..."
+    sleep 1
+done
 
-# Instalar dependencias si no están instaladas
-if [ ! -d "vendor" ]; then
-    composer install --no-interaction
-fi
+# Limpiar cache
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
 
-# Generar key si no existe
-if [ ! -f ".env" ]; then
-    cp .env.example .env
-    php artisan key:generate
-fi
+# Migraciones y seeders
+php artisan migrate:fresh --seed --force
 
-# Ejecutar migraciones
-php artisan migrate --force
+# Generar documentación
+php artisan l5-swagger:generate
+
+# Optimizar
+php artisan optimize
+php artisan config:cache
+php artisan route:cache
 
 # Iniciar PHP-FPM
 php-fpm 
+
+# Iniciar Apache
+apache2-foreground
