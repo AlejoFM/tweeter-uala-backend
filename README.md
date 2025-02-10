@@ -188,6 +188,12 @@ docker-compose down --volumes --remove-orphans
 kubectl get pods --all-namespaces
 docker ps
 ```
+## Grafana
+- Grafana está disponible en `http://localhost:3000`
+- Credenciales: `admin / admin`
+
+## Prometheus
+- Prometheus está disponible en `http://localhost:9090`
 
 ## 📝 Comentarios y justificaciones
 
@@ -201,7 +207,7 @@ va a existir consistencia eventual, pero es minimo y no afectaría el funcionami
 
 ### Decisiones Técnicas
 - Se añadió Rate Limiting para prevenir ataques DDOS y sobrecarga del sistema.
-- Se podría añadir monitoreo de logs y métricas para tener un mejor control del sistema.
+- Se añadió Grafana para monitorear el sistema. 
 
 ### Infraestructura
 - Kubernetes se utiliza para auto-healing y gestión de pods, garantizando alta disponibilidad.

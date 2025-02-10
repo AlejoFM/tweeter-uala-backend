@@ -65,6 +65,14 @@ RUN php artisan optimize
 RUN php artisan config:cache
 RUN php artisan route:cache
 
+# Crear directorios para monitoreo
+RUN mkdir -p /var/www/docker/prometheus \
+    && mkdir -p /var/www/docker/grafana/provisioning/dashboards
+
+# Copiar archivos de configuración
+COPY docker/prometheus/prometheus.yml /var/www/docker/prometheus/
+COPY docker/grafana/provisioning/dashboards/dashboard.yml /var/www/docker/grafana/provisioning/dashboards/
+
 EXPOSE 80
 
 CMD ["/usr/local/bin/init.sh"]
