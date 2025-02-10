@@ -44,15 +44,23 @@ D --> C
 ```mermaid
 graph TD
     A[HTTP Request] --> B[TimelineController]
-    B --> C[GetForYouTimeline UseCase]
-    C --> D[CachedForYouTimelineRepository]
-    D --> |Cache Miss| E[EloquentForYouTimelineRepository]
+    B --> C[Timeline UseCase]
+    C --> D[CachedTimelineRepository]
+    D --> |Cache Miss| E[EloquentTimelineRepository]
     D --> |Cache Hit| F[(Redis)]
     E --> G[(MySQL)]
-    E --> H[Tweet Domain Model]
+    E --> H[Domain Models]
     F --> I[TimelineResource]
     H --> I
     I --> J[HTTP Response]
+
+    subgraph "Use Cases"
+    UC1[GetForYouTimeline]
+    UC2[GetFollowingTimeline]
+    end
+
+    C --- UC1
+    C --- UC2
 ```
 ### Capas y Responsabilidades
 
@@ -193,7 +201,6 @@ docker ps
 - Credenciales: `admin / admin`
 
 ## Prometheus
-- Prometheus está disponible en `http://localhost:9090`
 
 ## 📝 Comentarios y justificaciones
 
