@@ -14,13 +14,15 @@ class UserAuthorized
     {
         try {
             if (!$this->isUserAuthorized($request)) {
-                throw new UnauthorizedException('Usuario no autenticado');
+                throw new UnauthorizedException('User not authenticated');
             }
+
 
             $user = $this->getUserFromRequest($request);
             if (!$user) {
-                throw new UnauthorizedException('Usuario no encontrado');
+                throw new UnauthorizedException('User not found');
             }
+
 
             return $next($request);
         } catch (\Exception $e) {
