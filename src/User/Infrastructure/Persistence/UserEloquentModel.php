@@ -39,14 +39,15 @@ class UserEloquentModel extends Model
 
     public function following()
     {
-        return $this->belongsToMany(UserEloquentModel::class, 'follows', 'follower_id', 'following_id');
+        return $this->belongsToMany(UserEloquentModel::class, 'follows', 'follower_id', 'following_id')
+            ->withTimestamps();
     }
 
     public function followers()
     {
-        return $this->belongsToMany(UserEloquentModel::class, 'follows', 'following_id', 'follower_id');
+        return $this->belongsToMany(UserEloquentModel::class, 'follows', 'following_id', 'follower_id')
+            ->withTimestamps();
     }
     
 
 }
-
