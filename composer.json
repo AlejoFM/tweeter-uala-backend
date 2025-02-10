@@ -29,7 +29,8 @@
             "Database\\Seeders\\": "database/seeders/",
             "src\\User\\": "src/User/",
             "src\\Tweet\\": "src/Tweet/",
-            "src\\Timeline\\": "src/Timeline/"
+            "src\\Timeline\\": "src/Timeline/",
+            "src\\Shared\\": "src/Shared/"
         }
     },
     "autoload-dev": {
