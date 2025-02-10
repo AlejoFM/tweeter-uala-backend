@@ -1,6 +1,6 @@
 ## 🏗️ Arquitectura
 
-Este proyecto implementa una arquitectura limpia (Clean Architecture) junto con Domain-Driven Design (DDD), siguiendo los principios SOLID. La estructura del proyecto está organizada en capas:
+Este proyecto implementa una arquitectura de monolito modular junto con Domain-Driven Design (DDD), siguiendo los principios SOLID. La estructura del proyecto está organizada en capas y modulos:
 
 ### Alto nivel de las Capas de la Arquitectura
 ```mermaid
@@ -28,6 +28,11 @@ D --> C
 #### 4. Infrastructure Layer (`src/*/Infrastructure/`)
 - Repositories: Implementaciones de persistencia
 - Persistence: Modelos Eloquent y Factories
+
+#### 5. Shared Layer (`src/Shared/`)
+- Exceptions: Excepciones personalizadas
+- Models: Modelos de dominio compartidos
+- Todo lo que se pueda compartir entre modulos, pero no sea del Core.
 
 ### Patrones de Diseño Implementados
 - Repository Pattern: Abstracción de la persistencia
@@ -130,39 +135,34 @@ docker-compose up -d
 
 ### Despliegue en Kubernetes
 ```bash
-./scripts/deploy.sh
+.docker/scripts/deploy.sh
 ```
 
 ### Entornos de despliegue 
 - `kubectl apply -k k8s/environments/dev` : Desarrollo
 - `kubectl apply -k k8s/environments/prod` : Producción
 
-### Script de despliegue
-```bash
-./scripts/deploy.sh
-```
-
 ## 🧪 Testing
 
-### Execute all the tests
+### Ejecutar todos los tests
 ```bash
 php artisan test
 ```
 
-### Execute a specific module of tests
+### Ejecutar un módulo de tests específico
 ```bash
 php artisan test tests/Tweet.php
 php artisan test tests/User.php
 php artisan test tests/Timeline.php
 ```
 
-## 📚 Documentation
+## 📚 Documentación
 
 ### Swagger
 ```bash
 php artisan l5-swagger:generate
 ```
-- The documentation is available at `/docs/swagger`
+- La documentación está disponible en `/docs/swagger`
 
 ## 📈 Escalabilidad
 
@@ -171,7 +171,7 @@ php artisan l5-swagger:generate
 - Índices optimizados en MySQL
 - Paginación eficiente por cursor
 
-## Turn off the project
+## Apagar el proyecto
 Kubernetes
 ```bash
 kubectl delete deployments --all --all-namespaces
@@ -183,9 +183,27 @@ Docker
 docker-compose down --volumes --remove-orphans
 ```
 
-## Validate if the project turned off correctly
+## Validar si el proyecto se apagó correctamente
 ```bash
 kubectl get pods --all-namespaces
 docker ps
 ```
 
+## 📝 Comentarios y justificaciones
+
+### Arquitectura y Escalabilidad
+- Se optó por un monolito modular con DDD en lugar de microservicios para mantener la simplicidad inicial del desarrollo y aprovechar las capacidades modulares de Laravel.
+- La escalabilidad se maneja mediante Kubernetes, permitiendo escalado horizontal automático basado en CPU/memoria.
+- Se eligió Redis para optimización de lecturas por su simplicidad y efectividad, en lugar de implementar CQRS o MongoDB en esta etapa inicial.
+- En caso de necesitar optimizar aún más la lectura, se podrían replicar las tablas de tweets y usuarios en distintas bases de datos, y usar Redis para cachear las queries de los timelines de cada usuario. Al replicar las tablas
+va a existir consistencia eventual, pero es minimo y no afectaría el funcionamiento del sistema si se pushean los datos actualizados listos para la lectura cada n cantidad de tiempo.
+- Gracias a Kubernetes, con HPA y un balanceador de carga, se puede escalar el sistema horizontalmente de forma automática y balancear la carga de requests entre los pods.
+
+### Decisiones Técnicas
+- Se añadió Rate Limiting para prevenir ataques DDOS y sobrecarga del sistema.
+- Se podría añadir monitoreo de logs y métricas para tener un mejor control del sistema.
+
+### Infraestructura
+- Kubernetes se utiliza para auto-healing y gestión de pods, garantizando alta disponibilidad.
+- La arquitectura permite una futura migración a microservicios si fuera necesario.
+- Se priorizó una solución robusta pero simple, evitando la complejidad innecesaria de sistemas de mensajería como RabbitMQ o Kafka en esta etapa.
