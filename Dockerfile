@@ -49,6 +49,22 @@ RUN chmod +x /usr/local/bin/init.sh
 
 RUN sed -i 's/DB_DATABASE=.*/DB_DATABASE=tweeter-uala-db/g' /var/www/.env.testing
 
+# Generar key de aplicación
+RUN php artisan key:generate
+
+# Generar documentación Swagger
+RUN php artisan l5-swagger:generate
+
+# Limpiar cache
+RUN php artisan cache:clear
+RUN php artisan config:clear
+RUN php artisan route:clear
+
+# Optimizar
+RUN php artisan optimize
+RUN php artisan config:cache
+RUN php artisan route:cache
+
 EXPOSE 80
 
 CMD ["/usr/local/bin/init.sh"]
