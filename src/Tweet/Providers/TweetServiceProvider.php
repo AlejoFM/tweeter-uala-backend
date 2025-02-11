@@ -22,7 +22,7 @@ class TweetServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadRoutesFrom(
-            __DIR__ . '/../Infrastructure/Routes/api.php'
+            __DIR__ . '/../Presentation/Routes/api.php'
         );
     }
 } 
