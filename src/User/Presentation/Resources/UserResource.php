@@ -8,10 +8,10 @@ class UserResource extends JsonResource
 {
     public function toArray($user)
     {
+        $user = $this->resource;
         return [
-            'id' => $user->id,
-            'username' => $user->username,
-            'created_at' => $user->created_at,
+            'id' => $user->getId(),
+            'username' => $user->getUsername(),
         ];
     }
 
