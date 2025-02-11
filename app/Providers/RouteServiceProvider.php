@@ -31,9 +31,9 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(function () {
                     require base_path('routes/api.php');
-                    require base_path('src/Tweet/Infrastructure/Routes/api.php');
-                    require base_path('src/User/Infrastructure/Routes/api.php');
-                    require base_path('src/Timeline/Infrastructure/Routes/api.php');
+                    require base_path('src/Tweet/Presentation/Routes/api.php');
+                    require base_path('src/User/Presentation/Routes/api.php');
+                    require base_path('src/Timeline/Presentation/Routes/api.php');
                 });
 
             Route::middleware('web')
